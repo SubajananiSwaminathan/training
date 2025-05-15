@@ -1,9 +1,13 @@
-package org.example.springboot_basics;
+package org.example.springboot_basics.controller;
 
+import org.example.springboot_basics.dto.request.StudentRequest;
+import org.example.springboot_basics.dto.response.StudentResponse;
+import org.example.springboot_basics.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/students")
@@ -15,17 +19,17 @@ public class StudentController {
         this.studentService = studentService;
     }
     @GetMapping
-    public List<Student> getAllStudents() {
+    public List<StudentResponse> getAllStudents() {
         return studentService.getAllStudents();
     }
 
     @GetMapping("/{id}")
-    public Student getStudentById(@PathVariable String id) {
+    public Optional<StudentResponse> getStudentById(@PathVariable String id) {
         return studentService.getStudentById(id);
     }
 
     @PostMapping
-    public Student createStudent(@RequestBody Student student) {
+    public StudentResponse createStudent(@RequestBody StudentRequest student) {
         return studentService.createStudent(student);
     }
 
