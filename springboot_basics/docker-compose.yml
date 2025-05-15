@@ -1,0 +1,18 @@
+version: '3'
+services:
+  springboot-app:
+    image: openjdk:11-jdk-slim
+    container_name: springboot-app
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: mvn spring-boot:run
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
